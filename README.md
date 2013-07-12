@@ -1,4 +1,4 @@
-![](https://raw.github.com/mattt/rocket/master/rocket.svg)
+![](https://rawgithub.com/mattt/rocket/master/rocket.svg)
 
 # Rocket
 
@@ -12,11 +12,11 @@ _a.k.a REST over WebSockets_
 
 Just as light can act as both a particle and a wave...
 
-![](https://raw.github.com/mattt/rocket/master/figure-light-particle-wave.svg)
+![](https://rawgithub.com/mattt/rocket/master/figure-light-particle-wave.svg)
 
 ...so information can be thought as both a document and a stream.
 
-![](https://raw.github.com/mattt/rocket/master/figure-information-document-stream.svg)
+![](https://rawgithub.com/mattt/rocket/master/figure-information-document-stream.svg)
 
 Cloud application developers are comfortable interacting with data like documents, according to REST conventions:
 

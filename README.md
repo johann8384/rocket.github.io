@@ -179,5 +179,5 @@ As far as I can tell, there is no existing standard for using websockets as a tr
 
 Much of Rocket's success is contingent on Heroku adding websocket support to its platform, allowing developers to experiment with this new architecture without any addons or additional configuration. I remain hopeful that we'll be able to ship something soon.
 
-I'd love nothing to talk through this whole space with more people, so if you have any questions or comments, don't hesitate to get in touch: <mattt@heroku.com>
+I'd love nothing more than to talk through this with others, so if you have any questions or comments, don't hesitate to get in touch: <mattt@heroku.com>
 

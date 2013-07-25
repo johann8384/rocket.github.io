@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="viewport" content="width=device-width">
+    <link rel="stylesheet" href="/css/syntax.css">
+    <link rel="stylesheet" href="/css/screen.css">
+  </head>
+
+  <body>
+    <header>
+      <div role="container">
+        <hgroup>
+          <h1>Rocket</h1>
+          <h2>a hybrid approach to real-time cloud applications</h2>
+        </hgroup>
+      </div>
+    </header>
+
+    <div role="container">
+      <article>
+        <blockquote>
+<p><em>Rocket is a technique for building real-time functionality on top of REST web services that leverages web standards like <a href='http://dev.w3.org/html5/eventsource/'>Server-Sent Events</a> and <a href='http://tools.ietf.org/html/rfc6902'>JSON Patch</a>.</em> Most importantly, it fits comfortably with how you&#8217;re already building applications.</p>
+</blockquote>
+
+<h1 id='a_tale_of_two_paradigms'>A Tale of Two Paradigms</h1>
+
+<blockquote>
+<blockquote>
+<p>Just as light can act as both a <em>particle</em> and a <em>wave</em> so information can be thought as both a <em>document</em> and a <em>stream</em>.</p>
+</blockquote>
+</blockquote>
+
+<p>Cloud application developers are comfortable interacting with data like documents, according to REST conventions, but messages could also be subscribed to, as a stream, such that new messages pushed to the client in real-time.</p>
+
+<p>Each approach has its particular strengths and weaknesses:</p>
+
+<ul>
+<li><strong>Documents</strong> are <em>stateless</em>, <em>long-lived</em> and <em>cacheable</em>, but must be polled for changes</li>
+
+<li><strong>Streams</strong> are <em>stateful</em>, <em>ad-hoc</em>, and <em>real-time</em>, but has limited semantics for managing information</li>
+</ul>
+
+<p>It&#8217;s clear that real-time will be increasingly important as cloud applications become more connected and ubiquitous, but there will still be a need for the current request-response architecture.</p>
+
+<h2 id='rocket_is_a_proposal_for_how_to_bridge_this_gap'>Rocket is a proposal for how to bridge this gap.</h2>
+
+<p>According to REST conventions, when a client makes an HTTP <code>GET</code> request to a resource endpoint, a list of records is returned. With Rocket, a client can additionally subscribe to changes for that resource by requesting an event stream at that endpoint.</p>
+<table id='document-versus-stream'>
+  <thead>
+    <tr>
+      <th />
+      <th>Document</th>
+      <th>Stream</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Request</td>
+      <td>
+<pre><code>GET /resources
+Accept: application/json
+</code></pre></td>
+      <td>
+<pre><code>GET /resources
+Accept: text/event-stream
+</code></pre></td>
+    </tr>
+    <tr>
+      <td>Response</td>
+      <td>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: application/json
+
+{"resources": [...]}
+</code></pre></td>
+      <td>
+<pre><code>HTTP/1.1 200 OK
+Content-Type: text/event-stream
+
+event: patch
+data: [{"op": "add", "path": "/resources/123", "value": {...}}]
+</code></pre></td>
+    </tr>
+  </tbody>
+</table>
+<p>Anytime a record is <em>created</em>, <em>updated</em>, or <em>destroyed</em>, an event is sent in real-time over the event stream, encoding the changes as a JSON Patch document.</p>
+<table>
+  <thead>
+    <tr>
+      <th>Create</th>
+      <th>Update</th>
+      <th>Destroy</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>
+        <tt>
+<pre>{
+  "op": "add",
+  "path": "/resources/123",
+  "value": {...}
+}</pre>
+        </tt>
+      </td>
+      <td>
+        <tt>
+<pre>{
+  "op": "update",
+  "path": "/resources/123",
+  "value": {...}
+}</pre>
+        </tt>
+      </td>
+      <td>
+        <tt>
+<pre>{
+  "op": "remove",
+  "path": "/resources/123"
+}</pre></tt>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<h1 id='building_on_a_solid_foundation'>Building on a Solid Foundation</h1>
+
+<blockquote>
+<blockquote>
+<p>Building robust, scalable software is difficult, but not nearly as tricky as getting developers to agree on things. <em>Standards, Conventions, and Specifications allow us to stop bike-shedding, and get back to solving real problems.</em></p>
+</blockquote>
+</blockquote>
+
+<h2 id='rest'>REST</h2>
+
+<p><a href='http://en.wikipedia.org/wiki/Representational_state_transfer'><strong>Re</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer</a>, or <acronym>REST</acronym>, is a convention for structuring web application interfaces.</p>
+
+<p>Resources are accessed and manipulated using the existing vocabulary and semantics of HTTP:</p>
+
+<ul>
+<li><code>GET /messages</code> <strong>reads</strong> a list of messages</li>
+
+<li><code>POST /messages</code> <strong>creates</strong> a new message</li>
+
+<li><code>GET /messages/123</code> <strong>reads</strong> a message</li>
+
+<li><code>PUT /messages/123</code> <strong>updates</strong> a message</li>
+
+<li><code>DELETE /messages/123</code> <strong>destroys</strong> a message</li>
+</ul>
+
+<h2 id='serversent_events'>Server-Sent Events</h2>
+
+<p><a href='http://dev.w3.org/html5/eventsource/'>Server-Sent Events</a> are used to push events to clients over a persistent HTTP connection. An event source stream is designated by the <code>text/event-stream</code> MIME type.</p>
+
+<p>Event messages are composed of newline-delimited fields, each of which contains the field name, followed by a colon, followed by the associated value. The following fields are defined in the specification:</p>
+
+<ul>
+<li><code>event</code>: The event&#8217;s type.</li>
+
+<li><code>id</code>: The event ID.</li>
+
+<li><code>data</code>: The data field for the message. Multiple lines that begin with &#8220;data:&#8221; will have their lines concatenated with a newline.</li>
+
+<li><code>retry</code>: The reconnection time to use when attempting to send the event. This must be an integer, specifying the reconnection time in milliseconds. If a non-integer value is specified, the field is ignored.</li>
+</ul>
+
+<p>Although originally designed to send messages to browsers using the <code>EventSource</code> DOM element, Server-Sent Events can be generalized for use with non-browser clients as well.</p>
+
+<h2 id='json_patch'>JSON Patch</h2>
+
+<p><a href='http://tools.ietf.org/html/rfc6902'>JSON Patch</a> describes a common format to represent changes in structured data. A JSON Patch response is designated by the <code>application/json-patch+json</code> MIME type.</p>
+
+<p>A patch is comprised by an array of operations. Six operation types are defined in the specification: <code>add</code>, <code>remove</code>, <code>replace</code>, <code>move</code>, <code>copy</code>, and <code>test</code>. Each operation specifies its type (<code>op</code>), a <code>path</code>, and an optional <code>value</code> or <code>from</code> field:</p>
+
+<pre><code>[
+  { &quot;op&quot;: &quot;add&quot;, &quot;path&quot;: &quot;/a/b/c&quot;, &quot;value&quot;: [ &quot;foo&quot;, &quot;bar&quot; ] },
+  { &quot;op&quot;: &quot;remove&quot;, &quot;path&quot;: &quot;/a/b/c&quot; },
+  { &quot;op&quot;: &quot;replace&quot;, &quot;path&quot;: &quot;/a/b/c&quot;, &quot;value&quot;: 42 },
+  { &quot;op&quot;: &quot;move&quot;, &quot;from&quot;: &quot;/a/b/c&quot;, &quot;path&quot;: &quot;/a/b/d&quot; },
+  { &quot;op&quot;: &quot;copy&quot;, &quot;from&quot;: &quot;/a/b/d&quot;, &quot;path&quot;: &quot;/a/b/e&quot; },
+  { &quot;op&quot;: &quot;test&quot;, &quot;path&quot;: &quot;/a/b/c&quot;, &quot;value&quot;: &quot;foo&quot; }
+]</code></pre>
+
+<p>Although the specification is described primarily in terms of applying a set of changes with an <code>HTTP</code> <code>PATCH</code> request made by the client to the server, the same structure could represent a change on the server that is communicated to clients as a means of resource synchronization.</p>
+
+<h1 id='implementations'>Implementations</h1>
+
+<h3 id='server'>Server</h3>
+
+<ul>
+<li><a href='https://github.com/mattt/rack-scaffold'>Rack::Scaffold</a> has an <a href='https://github.com/mattt/rack-scaffold/tree/experimental-rocket'>experimental branch</a> that demonstrates how server-sent events can be incorporated systematically into a data provider.</li>
+</ul>
+
+<h3 id='client'>Client</h3>
+
+<ul>
+<li><a href='https://github.com/AFNetworking/AFRocketClient'>AFRocketClient</a> provides a unified client interface to Rocket, making it easy to build real-time functionality on top of an existing REST app.</li>
+</ul>
+
+<h1 id='contributing'>Contributing</h1>
+
+<h2 id='discussion'>Discussion</h2>
+
+<p>If you have any strong ideas about how real-time cloud applications should be structured, it&#8217;d be great to get your perspective. Likewise, if you have any concerns or questions about Rocket in its concept or implementation, please share your thoughts.</p>
+
+<p>In any case, feel free to start or join a conversation on <a href='https://github.com/Rocket/rocket.github.io'>GitHub Issues</a>. Or if you&#8217;re looking for more individual attention, send an e-mail to <a href='mailto:mattt@heroku.com'>&#109;&#097;&#116;&#116;&#116;&#064;&#104;&#101;&#114;&#111;&#107;&#117;&#046;&#099;&#111;&#109;</a>.</p>
+
+<h2 id='implementations'>Implementations</h2>
+
+<p>Want to get in on the ground floor of Rocket&#8217;s ecosystem? Try your hand at implementing Rocket on your favorite server or client language / framework. And if you do get something up and running, let us know by <a href='https://github.com/Rocket/rocket.github.io'>submitting a pull request to mention the project on this page</a>.</p>
+
+<h1 id='thinking_out_loud'>Thinking Out Loud</h1>
+
+<blockquote>
+<blockquote>
+<p><em>We&#8217;ve only scratched the surface of what&#8217;s possible with real-time cloud applications.</em> What follows are some random thoughts surrounding this space.</p>
+</blockquote>
+</blockquote>
+
+<ul>
+<li>Rocket could also be implemented using web sockets as its transport layer without any other changes.</li>
+
+<li>It&#8217;s yet unclear how a traditional MVC architecture should delegate responsibilities for resource change notifications. Because controllers mediate persistent connections to clients, a strong argument can be made for delegating responsibilities for notification entirely to the controller.</li>
+
+<li>That said, if JSON Patch were to be re-appropriated as a wire protocol for replication, changes could be streamed directly to clients from the database&#8230; which could be awesome.</li>
+
+<li>A pedantic concern: should the event stream response <code>Content-Type</code> somehow encode that the <code>data</code> fields are encoded as JSON Patch documents?</li>
+
+<li>Of the commonly-documented software design patterns, is there one that encapsulates an object providing a concrete implementation for executing patch commands on a collection?</li>
+</ul>
+
+<h1 id='references'>References</h1>
+
+<ul>
+<li><a href='http://tools.ietf.org/html/rfc2616'>RFC 2616 - Hypertext Transfer Protocol — HTTP/1.1</a></li>
+
+<li><a href='http://tools.ietf.org/html/rfc6902'>RFC 6902 - JavaScript Object Notation (JSON) Patch</a></li>
+
+<li><a href='http://dev.w3.org/html5/eventsource/'>W3C Draft Specification - Server-Sent Events</a></li>
+
+<li><a href='http://en.wikipedia.org/wiki/Ajax_(programming'>Wikipedia Article for AJAX</a>)</li>
+
+<li><a href='http://en.wikipedia.org/wiki/Comet_(programming'>Wikipedia Article for Comet</a>)</li>
+
+<li><a href='https://developer.mozilla.org/en-US/docs/Server-sent_events/Using_server-sent_events'>&#8220;Using Server-Sent Events&#8221; on the Mozilla Developer Center</a></li>
+</ul>
+      </article>
+
+      <footer>
+        <p>Created by <a href="https://twitter.com/mattt">Mattt Thompson</a></p>
+      </footer>
+    </div>
+
+    <script type="text/javascript">
+      var _gauges = _gauges || [];
+      (function() {
+        var t   = document.createElement('script');
+        t.type  = 'text/javascript';
+        t.async = true;
+        t.id    = 'gauges-tracker';
+        t.setAttribute('data-site-id', '51f1a2d5613f5d1ec7000028');
+        t.src = '//secure.gaug.es/track.js';
+        var s = document.getElementsByTagName('script')[0];
+        s.parentNode.insertBefore(t, s);
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,102 @@
+@import compass/reset
+@import compass
+@import blueprint
+
+html
+  +blueprint
+  font-size: 140%
+
+  body
+    font-family: "Avenir", "Helvetica Neue", "Helvetica", sans-serif
+
+  a
+    color: #333 !important
+
+
+[role="container"]
+  +container
+  width: +span(22)
+
+body > header
+  +text-shadow(#eee 0px -1px 1px)
+  background: url("/images/bg.jpg") #1e292e center center
+  padding: 4em 0
+  margin-bottom: 1em
+
+  hgroup
+    text-align: center
+
+    h1
+      font-size: 8em
+      margin-bottom: 0.25em
+
+    h2
+      font-size: 1.5em
+      font-weight: 100
+
+    h1, h2
+      color: #fff
+
+article
+  blockquote
+    font-size: 2em
+    margin: 1em 0
+    color: #999
+    font-style: normal !important
+
+    blockquote
+      font-size: 80%
+      margin: 0
+      padding: 0
+
+    em
+      color: #333
+      font-style: normal !important
+
+  h1
+    font-size: 3em
+    margin-top: 2em
+
+  h2
+    margin-top: 2em
+
+  h3
+    margin-top: 1.5em
+
+  table
+    th
+      text-align: center
+      background: transparent
+      padding-bottom: 2px
+      border-bottom: 2px #ccc solid
+
+    td
+      vertical-align: top
+
+  ul
+    +prepend(2)
+    +append(2)
+
+    li
+      margin-bottom: 0.5em
+
+footer
+  border-top: 1px #eee solid
+  padding: 3em 0
+  margin-top: 2em
+  text-align: center
+
+table#document-versus-stream
+  tr
+    td:first-child
+      width: 20%
+      vertical-align: middle !important
+      font-weight: bold
+    td
+      width: 40%
+
+      pre
+        padding: 0 1.5em
+
+.wf-loading
+  visibility: hidden

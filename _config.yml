@@ -1,0 +1,3 @@
+name: Rocket
+pygments: true
+exclude: ["config.rb", "README.md"]

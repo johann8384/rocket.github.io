@@ -18,26 +18,34 @@ html
 
 body > header
   +text-shadow(#eee 0px -1px 1px)
-  background: url(/images/bg.jpg) #1e292e center center
+  background: url(/images/bg.jpg) #1e292e center center fixed
   background-size: contain
   padding: 4em 0
   margin-bottom: 1em
   min-width: +span(22)
+  border-bottom: 5px #c9c9c9 solid
+
+  #logo
+    display: block
+    margin: 0 auto 3em auto
 
   hgroup
     text-align: center
     width: 100%
 
     h1
-      font-size: 8em
+      color: #fff
+      font-size: 7em
       margin-bottom: 0.25em
+      text-transform: uppercase
+      font-variant: small-caps
+      letter-spacing: 10px
 
     h2
-      font-size: 1.5em
+      font-size: 1.25em
       font-weight: 100
+      color: #c9c9c9
 
-    h1, h2
-      color: #fff
 
 article
   padding: 20px
@@ -89,6 +97,9 @@ footer
   padding: 3em 0
   margin-top: 2em
   text-align: center
+
+  section
+    margin-bottom: 2em
 
 table#document-versus-stream
   tr

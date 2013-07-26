@@ -1,4 +1,5 @@
 ---
+title: "Rocket: a hybrid approach to real-time cloud applications"
 layout: default
 ---
 

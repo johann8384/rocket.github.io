@@ -12,19 +12,21 @@ html
   a
     color: #333 !important
 
-
 [role="container"]
   +container
   width: +span(22)
 
 body > header
   +text-shadow(#eee 0px -1px 1px)
-  background: url("/images/bg.jpg") #1e292e center center
+  background: #1e292e center center
+  background-size: contain
   padding: 4em 0
   margin-bottom: 1em
+  min-width: +span(22)
 
   hgroup
     text-align: center
+    width: 100%
 
     h1
       font-size: 8em
@@ -38,6 +40,8 @@ body > header
       color: #fff
 
 article
+  padding: 20px
+
   blockquote
     font-size: 2em
     margin: 1em 0
@@ -89,11 +93,11 @@ footer
 table#document-versus-stream
   tr
     td:first-child
-      width: 20%
+      width: +span(3)
       vertical-align: middle !important
       font-weight: bold
     td
-      width: 40%
+      width: +span(6)
 
       pre
         padding: 0 1.5em

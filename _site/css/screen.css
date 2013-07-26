@@ -1068,7 +1068,7 @@ html a {
   color: #333333 !important;
 }
 
-/* line 16, ../sass/screen.sass */
+/* line 15, ../sass/screen.sass */
 [role="container"] {
   width: 950px;
   margin: 0 auto;
@@ -1077,85 +1077,92 @@ html a {
   width: 870px;
 }
 
-/* line 20, ../sass/screen.sass */
+/* line 19, ../sass/screen.sass */
 body > header {
   text-shadow: #eeeeee 0px -1px 1px;
-  background: url("/images/bg.jpg") #1e292e center center;
+  background: #1e292e center center;
+  background-size: contain;
   padding: 4em 0;
   margin-bottom: 1em;
+  min-width: 870px;
 }
-/* line 26, ../sass/screen.sass */
+/* line 27, ../sass/screen.sass */
 body > header hgroup {
   text-align: center;
+  width: 100%;
 }
-/* line 29, ../sass/screen.sass */
+/* line 31, ../sass/screen.sass */
 body > header hgroup h1 {
   font-size: 8em;
   margin-bottom: 0.25em;
 }
-/* line 33, ../sass/screen.sass */
+/* line 35, ../sass/screen.sass */
 body > header hgroup h2 {
   font-size: 1.5em;
   font-weight: 100;
 }
-/* line 37, ../sass/screen.sass */
+/* line 39, ../sass/screen.sass */
 body > header hgroup h1, body > header hgroup h2 {
   color: white;
 }
 
-/* line 41, ../sass/screen.sass */
+/* line 42, ../sass/screen.sass */
+article {
+  padding: 20px;
+}
+/* line 45, ../sass/screen.sass */
 article blockquote {
   font-size: 2em;
   margin: 1em 0;
   color: #999999;
   font-style: normal !important;
 }
-/* line 47, ../sass/screen.sass */
+/* line 51, ../sass/screen.sass */
 article blockquote blockquote {
   font-size: 80%;
   margin: 0;
   padding: 0;
 }
-/* line 52, ../sass/screen.sass */
+/* line 56, ../sass/screen.sass */
 article blockquote em {
   color: #333333;
   font-style: normal !important;
 }
-/* line 56, ../sass/screen.sass */
+/* line 60, ../sass/screen.sass */
 article h1 {
   font-size: 3em;
   margin-top: 2em;
 }
-/* line 60, ../sass/screen.sass */
+/* line 64, ../sass/screen.sass */
 article h2 {
   margin-top: 2em;
 }
-/* line 63, ../sass/screen.sass */
+/* line 67, ../sass/screen.sass */
 article h3 {
   margin-top: 1.5em;
 }
-/* line 67, ../sass/screen.sass */
+/* line 71, ../sass/screen.sass */
 article table th {
   text-align: center;
   background: transparent;
   padding-bottom: 2px;
   border-bottom: 2px #cccccc solid;
 }
-/* line 73, ../sass/screen.sass */
+/* line 77, ../sass/screen.sass */
 article table td {
   vertical-align: top;
 }
-/* line 76, ../sass/screen.sass */
+/* line 80, ../sass/screen.sass */
 article ul {
   padding-left: 80px;
   padding-right: 80px;
 }
-/* line 80, ../sass/screen.sass */
+/* line 84, ../sass/screen.sass */
 article ul li {
   margin-bottom: 0.5em;
 }
 
-/* line 83, ../sass/screen.sass */
+/* line 87, ../sass/screen.sass */
 footer {
   border-top: 1px #eeeeee solid;
   padding: 3em 0;
@@ -1163,22 +1170,22 @@ footer {
   text-align: center;
 }
 
-/* line 91, ../sass/screen.sass */
+/* line 95, ../sass/screen.sass */
 table#document-versus-stream tr td:first-child {
-  width: 20%;
+  width: 110px;
   vertical-align: middle !important;
   font-weight: bold;
 }
-/* line 95, ../sass/screen.sass */
+/* line 99, ../sass/screen.sass */
 table#document-versus-stream tr td {
-  width: 40%;
+  width: 230px;
 }
-/* line 98, ../sass/screen.sass */
+/* line 102, ../sass/screen.sass */
 table#document-versus-stream tr td pre {
   padding: 0 1.5em;
 }
 
-/* line 101, ../sass/screen.sass */
+/* line 105, ../sass/screen.sass */
 .wf-loading {
   visibility: hidden;
 }

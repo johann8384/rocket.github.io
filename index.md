@@ -184,10 +184,9 @@ Want to get in on the ground floor of Rocket's ecosystem? Try your hand at imple
 - [RFC 2616 - Hypertext Transfer Protocol — HTTP/1.1][RFC2616]
 - [RFC 6902 - JavaScript Object Notation (JSON) Patch][RFC6902]
 - [W3C Draft Specification - Server-Sent Events][SSE]
-- [Wikipedia Article for AJAX](http://en.wikipedia.org/wiki/Ajax_(programming))
-- [Wikipedia Article for Comet](http://en.wikipedia.org/wiki/Comet_(programming))
+- [Wikipedia Article for AJAX](http://en.wikipedia.org/wiki/Ajax_%28programming%29)
+- [Wikipedia Article for Comet](http://en.wikipedia.org/wiki/Comet_%28programming%29)
 - ["Using Server-Sent Events" on the Mozilla Developer Center](https://developer.mozilla.org/en-US/docs/Server-sent_events/Using_server-sent_events)
-
 
 [RFC2616]: http://tools.ietf.org/html/rfc2616
 [RFC6902]: http://tools.ietf.org/html/rfc6902

@@ -7,14 +7,12 @@ layout: default
 
 # A Tale of Two Paradigms
 
->> Just as light can act as both a _particle_ and a _wave_ so information can be thought as both a _document_ and a _stream_.
-
-Cloud application developers are comfortable interacting with data like documents, according to REST conventions, but messages could also be subscribed to, as a stream, such that new messages pushed to the client in real-time.
+>> Just as light can act as both a _particle_ and a _wave_, so information can be thought as both a _document_ and a _stream_.
 
 Each approach has its particular strengths and weaknesses:
 
-- **Documents** are _stateless_, _long-lived_ and _cacheable_, but must be polled for changes
-- **Streams** are _stateful_, _ad-hoc_, and _real-time_, but has limited semantics for managing information
+- **Documents** are _stateless_, _long-lived_ and _cacheable_, but must be polled for changes.
+- **Streams** are _stateful_, _ad-hoc_, and _real-time_, but has limited semantics for managing information.
 
 It's clear that real-time will be increasingly important as cloud applications become more connected and ubiquitous, but there will still be a need for the current request-response architecture.
 
@@ -148,7 +146,7 @@ A patch is comprised by an array of operations. Six operation types are defined 
 
 Although the specification is described primarily in terms of applying a set of changes with an `HTTP` `PATCH` request made by the client to the server, the same structure could represent a change on the server that is communicated to clients as a means of resource synchronization.
 
-# Implementations
+# Reference Implementations
 
 ### Server
 
@@ -166,7 +164,7 @@ If you have any strong ideas about how real-time cloud applications should be st
 
 In any case, feel free to start or join a conversation on [GitHub Issues](https://github.com/Rocket/rocket.github.io). Or if you're looking for more individual attention, send an e-mail to <mattt@heroku.com>.
 
-## Implementations
+## Code
 
 Want to get in on the ground floor of Rocket's ecosystem? Try your hand at implementing Rocket on your favorite server or client language / framework. And if you do get something up and running, let us know by [submitting a pull request to mention the project on this page](https://github.com/Rocket/rocket.github.io).
 

@@ -53,7 +53,13 @@ Content-Type: application/json
 Content-Type: text/event-stream
 
 event: patch
-data: [{"op": "add", "path": "/resources/123", "value": {...}}]
+data: [
+        {
+          "op": "add",
+          "path": "/resources/123",
+          "value": {...}
+        }
+      ]
 </code></pre></td>
     </tr>
   </tbody>

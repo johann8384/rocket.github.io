@@ -18,7 +18,7 @@ It's clear that real-time will be increasingly important as cloud applications b
 
 ## Rocket is a proposal for how to bridge this gap.
 
-According to REST conventions, when a client makes an HTTP `GET` request to a resource endpoint, a list of records is returned. With Rocket, a client can additionally subscribe to changes for that resource by requesting an event stream at that endpoint.
+According to REST conventions, when a client makes an HTTP `GET` request to a resource endpoint, a list of records is returned. With Rocket, a client can additionally `SUBSCRIBE` to changes for that resource by requesting an event stream at that endpoint.
 
 <table id="document-versus-stream">
   <thead>
@@ -36,7 +36,7 @@ According to REST conventions, when a client makes an HTTP `GET` request to a re
 Accept: application/json
 </code></pre></td>
       <td>
-<pre><code>GET /resources
+<pre><code>SUBSCRIBE /resources
 Accept: text/event-stream
 </code></pre></td>
     </tr>
@@ -179,6 +179,7 @@ Want to get in on the ground floor of Rocket's ecosystem? Try your hand at imple
 >> _We've only scratched the surface of what's possible with real-time cloud applications._ What follows are some random thoughts surrounding this space.
 
 - Rocket could also be implemented using web sockets as its transport layer without any other changes.
+- The use of the non-standard `SUBSCRIBE` HTTP method is preferred in order to distinguish from potentially incompatible usage of event streams, though there is no reason why a `GET` would not also be appropriate.
 - It's yet unclear how a traditional MVC architecture should delegate responsibilities for  resource change notifications. Because controllers mediate persistent connections to clients, a strong argument can be made for delegating responsibilities for notification entirely to the controller.
 - That said, if JSON Patch were to be re-appropriated as a wire protocol for replication, changes could be streamed directly to clients from the database... which could be awesome.
 - A pedantic concern: should the event stream response `Content-Type` somehow encode that the `data` fields are encoded as JSON Patch documents?

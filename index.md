@@ -178,7 +178,7 @@ Want to get in on the ground floor of Rocket's ecosystem? Try your hand at imple
 
 >> _We've only scratched the surface of what's possible with real-time cloud applications._ What follows are some random thoughts surrounding this space.
 
-- Rocket could also be implemented using web sockets as its transport layer without any other changes.
+- Rocket could also be implemented using web sockets or third-party push providers as its transport layer without any other changes. Using HTTP for both document and stream access benefits from uniformity of interface, as well as broad compatibility.
 - The use of the non-standard `SUBSCRIBE` HTTP method is preferred in order to distinguish from potentially incompatible usage of event streams, though there is no reason why a `GET` would not also be appropriate.
 - It's yet unclear how a traditional MVC architecture should delegate responsibilities for  resource change notifications. Because controllers mediate persistent connections to clients, a strong argument can be made for delegating responsibilities for notification entirely to the controller.
 - That said, if JSON Patch were to be re-appropriated as a wire protocol for replication, changes could be streamed directly to clients from the database... which could be awesome.

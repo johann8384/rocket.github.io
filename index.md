@@ -156,11 +156,11 @@ Although the specification is described primarily in terms of applying a set of 
 
 ### Server
 
-- [Rack::Scaffold](https://github.com/mattt/rack-scaffold) has an [experimental branch](https://github.com/mattt/rack-scaffold/tree/experimental-rocket) that demonstrates how server-sent events can be incorporated systematically into a data provider.
+- [Rack::Scaffold](https://github.com/mattt/rack-scaffold) has an [experimental branch](https://github.com/mattt/rack-scaffold/tree/experimental-sse) that demonstrates how server-sent events can be incorporated systematically into a data provider.
 
 ### Client
 
-- [AFRocketClient](https://github.com/AFNetworking/AFRocketClient) provides a unified client interface to Rocket, making it easy to build real-time functionality on top of an existing REST app.
+- [AFNetworking 2.0](https://github.com/AFNetworking/AFNetworking/blob/2.0/AFNetworking/AFHTTPClient%2BRocket.h) provides a unified client interface to Rocket, making it easy to build real-time functionality on top of an existing REST app.
 
 # Contributing
 

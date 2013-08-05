@@ -89,7 +89,7 @@ Anytime a record is _created_, _updated_, or _destroyed_, an event is sent in re
       <td>
         <tt>
 <pre>{
-  "op": "update",
+  "op": "replace",
   "path": "/resources/123",
   "value": {...}
 }</pre>
